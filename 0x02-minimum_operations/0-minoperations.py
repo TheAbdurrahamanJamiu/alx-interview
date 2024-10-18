@@ -1,19 +1,15 @@
 #!/usr/bin/python3
 def minOperations(n):
-    if n <= 1:
-        return 0
-                    
-    min_operations = float('inf')
+        if n <= 1:
+            return 0
 
-    for i in range(1, int(n**0.5) + 1):
-        if n % i == 0:
-            operations = i + (n // i - 1)
-            min_operations = min(min_operations, operations)
-            
-            complement = n // i
-            operations = complement + (n // complement - 1)
-            min_operations = min(min_operations, operations)
-            return min_operations
+        operations = 0
+        divisor = 2
+        
+        while n > 1:
+            while n % divisor == 0:
+                operations += divisor
+                n //= divisor
+                divisor += 1
 
-        # Example usage
-        print(minOperations(9))  # Output: 6
+        return operations
